@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Business Analyst</title>
+  <title>Ivera Business Consultant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -222,7 +224,7 @@
       <span class="logo-text">Live Analysis</span>
     </div>
     <div class="company-name" id="company-display">Loading...</div>
-    <div class="company-sub">AI Business Analyst</div>
+    <div class="company-sub">by Ivera AI Automation</div>
   </div>
 
   <div class="sidebar-section">
@@ -290,7 +292,7 @@
   </div>
 
   <div class="sidebar-footer">
-    Powered by Claude · Data as of March 2026
+    Ivera AI Automation · Powered by Claude
   </div>
 </div>
 
@@ -299,7 +301,7 @@
   <div id="header">
     <div class="header-left">
       <div>
-        <div class="header-title">AI Business Analyst</div>
+        <div class="header-title">Ivera Business Consultant</div>
         <div class="header-subtitle">Ask anything about your business</div>
       </div>
     </div>
@@ -321,9 +323,9 @@
   <!-- Messages -->
   <div id="messages">
     <div id="welcome">
-      <div class="welcome-icon">🧠</div>
-      <div class="welcome-title">Your AI Business Analyst is ready</div>
-      <div class="welcome-sub">Ask any question about your business. I have full access to your CRM, revenue, and analytics data.</div>
+      <div class="welcome-icon">📊</div>
+      <div class="welcome-title">Ivera Business Consultant</div>
+      <div class="welcome-sub">Your always-on AI strategist. Ask anything about your revenue, pipeline, churn, marketing, or growth — I have full access to your connected data.</div>
       <div class="welcome-cards">
         <div class="welcome-card" onclick="askSuggested(this.querySelector('.wc-text').textContent)">
           <div class="wc-icon">📉</div>
@@ -383,7 +385,7 @@
       const res = await fetch('/api/config');
       const cfg = await res.json();
       document.getElementById('company-display').textContent = cfg.companyName;
-      document.title = `${cfg.companyName} — AI Business Analyst`;
+      document.title = `${cfg.companyName} — ${cfg.agentName || 'Ivera Business Consultant'}`;
       if (!cfg.hasApiKey) {
         document.getElementById('setup-banner').style.display = 'flex';
       }
@@ -441,7 +443,7 @@
       <div class="msg-avatar agent">🧠</div>
       <div class="msg-content">
         <div class="msg-header">
-          <span class="msg-name">AI Business Analyst</span>
+          <span class="msg-name">Ivera Business Consultant</span>
           <span class="msg-time">${now()}</span>
         </div>
         <div class="msg-body agent-body">

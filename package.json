@@ -1,7 +1,7 @@
 {
-  "name": "ai-business-analyst-agent",
+  "name": "ivera-business-consultant",
   "version": "1.0.0",
-  "description": "AI Business Analyst & Consultant Agent — Chat Prototype",
+  "description": "Ivera AI Business Consultant — Intelligent business analysis powered by Claude",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

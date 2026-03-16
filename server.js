@@ -9,17 +9,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const COMPANY_NAME = process.env.COMPANY_NAME || 'Acme SaaS';
+const COMPANY_NAME  = process.env.COMPANY_NAME  || 'Acme SaaS';
+const AGENT_NAME    = process.env.AGENT_NAME    || 'Ivera Business Consultant';
+const AGENT_VERSION = process.env.AGENT_VERSION || '1.0';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // AGENT SYSTEM PROMPT
 // Inject your real company data here, or wire this up to live API calls.
 // ─────────────────────────────────────────────────────────────────────────────
 const buildSystemPrompt = (companyName) => `
-You are an AI Business Analyst and Consultant for ${companyName}.
+You are ${AGENT_NAME}, an AI-powered business analyst and strategic consultant for ${companyName}.
 
-You have direct access to the company's live business data across all connected systems.
-Your job is to surface what matters, identify growth opportunities, and give clear recommendations.
+You are a product of Ivera AI Automation Agency. You have direct access to the company's live
+business data across all connected systems. Your job is to surface what matters, identify growth
+opportunities, and give clear strategic recommendations — like a trusted CFO and growth advisor combined.
 
 ## Connected Data Sources
 - CRM (HubSpot): Pipeline, deals, contacts, close rates, rep performance
@@ -136,6 +139,8 @@ app.post('/api/chat', async (req, res) => {
 app.get('/api/config', (req, res) => {
   res.json({
     companyName: COMPANY_NAME,
+    agentName: AGENT_NAME,
+    agentVersion: AGENT_VERSION,
     hasApiKey: !!process.env.ANTHROPIC_API_KEY,
   });
 });
@@ -146,12 +151,13 @@ app.get('/api/config', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log('');
-  console.log('  ┌─────────────────────────────────────────────────┐');
-  console.log('  │   AI Business Analyst & Consultant Agent  v1.0  │');
-  console.log('  ├─────────────────────────────────────────────────┤');
-  console.log(`  │   Running at: http://localhost:${PORT}               │`);
-  console.log(`  │   Company:    ${COMPANY_NAME.padEnd(35)}│`);
-  console.log(`  │   API Key:    ${process.env.ANTHROPIC_API_KEY ? '✓ Loaded' : '✗ Missing — add to .env'}           │`);
-  console.log('  └─────────────────────────────────────────────────┘');
+  console.log('  ┌───────────────────────────────────────────────────┐');
+  console.log(`  │   ${AGENT_NAME.padEnd(48)}│`);
+  console.log('  ├───────────────────────────────────────────────────┤');
+  console.log(`  │   URL:      http://localhost:${String(PORT).padEnd(20)}│`);
+  console.log(`  │   Client:   ${COMPANY_NAME.padEnd(39)}│`);
+  console.log(`  │   Version:  ${AGENT_VERSION.padEnd(39)}│`);
+  console.log(`  │   API Key:  ${(process.env.ANTHROPIC_API_KEY ? '✓ Loaded' : '✗ Missing — add to .env').padEnd(39)}│`);
+  console.log('  └───────────────────────────────────────────────────┘');
   console.log('');
 });
