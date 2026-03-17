@@ -146,18 +146,22 @@ app.get('/api/config', (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Start server
+// Start server (local) — Vercel uses module.exports below
 // ─────────────────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('');
-  console.log('  ┌───────────────────────────────────────────────────┐');
-  console.log(`  │   ${AGENT_NAME.padEnd(48)}│`);
-  console.log('  ├───────────────────────────────────────────────────┤');
-  console.log(`  │   URL:      http://localhost:${String(PORT).padEnd(20)}│`);
-  console.log(`  │   Client:   ${COMPANY_NAME.padEnd(39)}│`);
-  console.log(`  │   Version:  ${AGENT_VERSION.padEnd(39)}│`);
-  console.log(`  │   API Key:  ${(process.env.ANTHROPIC_API_KEY ? '✓ Loaded' : '✗ Missing — add to .env').padEnd(39)}│`);
-  console.log('  └───────────────────────────────────────────────────┘');
-  console.log('');
-});
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log('');
+    console.log('  ┌───────────────────────────────────────────────────┐');
+    console.log(`  │   ${AGENT_NAME.padEnd(48)}│`);
+    console.log('  ├───────────────────────────────────────────────────┤');
+    console.log(`  │   URL:      http://localhost:${String(PORT).padEnd(20)}│`);
+    console.log(`  │   Client:   ${COMPANY_NAME.padEnd(39)}│`);
+    console.log(`  │   Version:  ${AGENT_VERSION.padEnd(39)}│`);
+    console.log(`  │   API Key:  ${(process.env.ANTHROPIC_API_KEY ? '✓ Loaded' : '✗ Missing — add to .env').padEnd(39)}│`);
+    console.log('  └───────────────────────────────────────────────────┘');
+    console.log('');
+  });
+}
+
+module.exports = app;
